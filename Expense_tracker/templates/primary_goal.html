@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primary Goal Selection</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/cover.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fixed background image */
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .options-container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center; /* Center the options */
+        }
+        
+        .option {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px; /* Add margin between buttons */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove default underline for buttons */
+        }
+        
+        .option:last-child {
+            margin-bottom: 0; /* Remove bottom margin for the last button */
+        }
+        
+        .option:hover {
+            background-color: #0056b3;
+        }
+
+        .heading-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%; /* Make the heading container occupy full width */
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 24px;
+            color: #333; /* Darker text color */
+        }
+
+        .next-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .next-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="options-container">
+            <div class="heading-container">
+                <h1>What is your Primary Goal?</h1>
+            </div>
+            <a href="{{ url_for('home') }}" class="option">Budgeting</a>
+            <a href="{{ url_for('home') }}" class="option">Track my spending</a>
+            <a href="{{ url_for('home') }}" class="option">Save money</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to redirect to the home page
+        function redirectToHome() {
+            // Redirect to the home page without adding an entry to the browser history
+            window.location.replace('/home');
+        }
+    </script>
+</body>
+</html>

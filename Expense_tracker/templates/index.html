@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendSavvy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/cover.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0.5, 0.5, 0.5, 0.5); /* Adjust opacity here (0.5 is 50% opacity) */
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to SpendSavvy</h1>
+        <p>Expense Tracking Made Simple, Savings Made Sweeter!</p>
+        
+        <a href="{{ url_for('signup') }}" class="btn">Sign Up</a>
+        <a href="{{ url_for('login') }}" class="btn">Log In</a>
+        <p>Get started</p>
+    </div>
+</body>
+</html>

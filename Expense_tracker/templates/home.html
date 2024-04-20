@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Expense Tracker</title>
+    <style>
+        /* CSS styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/cover.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333; /* Dark text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #007bff; /* Blue navbar */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .content {
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9); /* White semi-transparent background */
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: #007bff; /* Blue heading */
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #333; /* Dark text color */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue button */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/home">Home</a>
+    <a href="/add_expense">Add Expense</a>
+    <a href="/add_income">Add Income</a>
+    <a href="/display_expenses">View Expenses</a>
+    <a href="/analysis">Analysis</a>
+    <a href="/create_group">Create Group</a>
+    <a href="/join_group">Join Group</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <div class="content">
+        <h1>Welcome to SpendSavy</h1>
+        <p>This is your personalized dashboard. You can track your expenses, view reports, and manage your finances here.</p>
+        <a href="/add_expense" class="btn">Add Expense</a>
+    </div>
+</div>
+<script>
+    function openGUI() {
+        // Send a request to Flask server to open the GUI
+        fetch('/analysis')
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+</script>
+</body>
+</html>

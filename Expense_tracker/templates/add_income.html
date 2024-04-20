@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Income</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/cover.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fixed background image */
+        }
+
+        /* Navigation bar styles */
+        .navbar {
+            overflow: hidden;
+            background-color: #007bff; /* Blue navbar */
+            
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto; /* Center the container */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Soft shadow effect */
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: calc(100% - 22px);
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+    <!-- Navigation bar -->
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_expense') }}">Add Expense</a>
+        <a href="{{ url_for('add_income') }}">Add Income</a>
+        <a href="/display_expenses">View Expenses</a>
+        <a href="/analysis">Analysis</a>
+        <a href="/logout">Logout</a>
+</div>
+    <div class="container">
+        <h2>Add Income</h2>
+        <form action="{{ url_for('add_income') }}" method="POST">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="10" required>
+            <br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <br>
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value=""></option>
+                <option value="salary">Salary</option>
+                <option value="bonus">Bonus</option>
+                <option value="investment">Investment</option>
+                <option value="other">Other</option>
+            </select>
+            <br>
+            <button type="submit">Add Income</button>
+        </form>
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

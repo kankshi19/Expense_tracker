@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Group</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/cover.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], button {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for the pop-up */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #007bff; /* Blue navbar */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/add_expense">Add Expense</a>
+        <a href="/add_income">Add Income</a>
+        <a href="/display_expenses">View Expenses</a>
+        <a href="/analysis">Analysis</a>
+        <a href="/create_group">Create Group</a>
+        <a href="/join_group">Join Group</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="container">
+        <h1>Create Group</h1>
+        <form id="createGroupForm" action="/create_group" method="post">
+            <label for="group_name">Group Name:</label>
+            <input type="text" id="group_name" name="group_name">
+            <button type="button" onclick="createGroup()">Create Group</button>
+        </form>
+    </div>
+
+    <!-- Pop-up container -->
+    <div id="popupContainer" class="overlay" style="display: none;">
+        <div class="popup">
+            <p>Your group has been created!</p>
+            <p>Join Code: <span id="joinCode"></span></p>
+            <button onclick="copyCode()">Copy Code</button>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        var groupCode; // Variable to store the generated group code
+        
+        // Function to create the group and show the join code
+        function createGroup() {
+            // Simulate generating a random join code (you may want to implement this logic on the server)
+            groupCode = generateRandomCode();
+            
+            // Show the pop-up with the join code
+            document.getElementById("joinCode").innerText = groupCode;
+            document.getElementById("popupContainer").style.display = "block";
+            
+            // Set the generated group code in localStorage
+            localStorage.setItem("groupCode", groupCode);
+        }
+
+        // Function to generate a random 4-digit code
+        function generateRandomCode() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
+        // Function to close the pop-up
+        function closePopup() {
+            document.getElementById("popupContainer").style.display = "none";
+        }
+
+        // Function to copy the join code to clipboard
+        function copyCode() {
+            var tempInput = document.createElement("input");
+            tempInput.setAttribute("value", groupCode);
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Code copied to clipboard!");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Group</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/cover.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="number"], button {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #peopleInputs {
+            display: none;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #007bff; /* Blue navbar */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/add_expense">Add Expense</a>
+        <a href="/add_income">Add Income</a>
+        <a href="/display_expenses">View Expenses</a>
+        <a href="/analysis">Analysis</a>
+        <a href="/create_group">Create Group</a>
+        <a href="/join_group">Join Group</a>
+        <a href="/logout">Logout</a>
+    </div>
+    
+    <div class="container">
+        <h1>Join Group</h1>
+        <form id="joinGroupForm" action="/join_group" method="post">
+            <label for="group_code">Enter Group Code:</label><br>
+            <input type="text" id="group_code" name="group_code"><br><br>
+            <button type="button" onclick="verifyCode()">Verify Code</button>
+        </form>
+
+        <div id="peopleInputs">
+            <label for="num_people">Number of People:</label><br>
+            <input type="number" id="num_people" name="num_people" min="1" value="1" onchange="createInputs()"><br><br>
+            <div id="personInputs"></div>
+            <button type="button" onclick="joinGroup()">Add Group Expense</button>
+        </div>
+
+        <div id="verificationMessage"></div> <!-- Placeholder for verification message -->
+    </div>
+
+    <script>
+        var groupCode = localStorage.getItem("groupCode"); // Get the generated group code from localStorage
+
+        // Function to verify the entered code
+        function verifyCode() {
+            var enteredCode = document.getElementById("group_code").value;
+
+            // Check if the entered code matches the group code
+            if (enteredCode.trim() === groupCode.trim()) {
+                document.getElementById("peopleInputs").style.display = "block";
+                document.getElementById("verificationMessage").innerText = "Code verified successfully.";
+            } else {
+                document.getElementById("verificationMessage").innerText = "Invalid code. Please enter a valid group code.";
+                document.getElementById("peopleInputs").style.display = "none"; // Hide the input fields
+            }
+        }
+      
+        function joinGroup() {
+        // Redirect to the add_group_expense page
+             window.location.href = "/add_group_expense";
+        }
+
+        // Function to create inputs for each person based on the number of people
+        function createInputs() {
+            var numPeople = parseInt(document.getElementById("num_people").value);
+            var personInputs = document.getElementById("personInputs");
+            personInputs.innerHTML = ""; // Clear previous inputs
+
+            for (var i = 0; i < numPeople; i++) {
+                var label = document.createElement("label");
+                label.innerText = "Person " + (i + 1) + " Name:";
+                personInputs.appendChild(label);
+
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "person_" + (i + 1) + "_name";
+                personInputs.appendChild(input);
+
+                personInputs.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/cover.jpeg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here (0.5 is 50% opacity) */
+            color: #fff;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+
+        .signup-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login to Expense Tracker</h1>
+        <form action="login" method="POST">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        {% if invalid %}
+            <script>
+                var result = confirm("Invalid username or password. Would you like to try again?");
+                if (result) {
+                    window.location.href = "{{ url_for('login')}}";
+                } else {
+                    window.location.href = "{{ url_for('index')}}";
+                }
+            </script>
+        {% endif %}
+        <a href="{{ url_for('signup') }}" class="signup-link">Don't have an account? Sign Up</a>
+    </div>
+</body>
+</html>
